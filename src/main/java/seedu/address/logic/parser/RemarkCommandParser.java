@@ -33,9 +33,8 @@ public class RemarkCommandParser {
                     RemarkCommand.MESSAGE_USAGE), ive);
         }
 
-        String remark = argMultimap.getValue(PREFIX_REMARK).orElse("");
-
-        return new RemarkCommand(index, new Remark(remark));
+        Remark remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).orElse(""));
+        return new RemarkCommand(index, remark);
     }
 
 }
