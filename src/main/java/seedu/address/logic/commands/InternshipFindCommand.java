@@ -33,8 +33,6 @@ public class InternshipFindCommand extends InternshipCommand {
             + "must be present or just any keyword must be present)\n"
             + "[" + PREFIX_COMPANY + " COMPANY_NAME_KEYWORD [MORE_COMPANY_NAME_KEYWORDS]\n"
             + "[" + PREFIX_CONTACT_NAME + " CONTACT_NAME_KEYWORD [MORE_CONTACT_NAME_KEYWORDS]\n"
-            + "[" + PREFIX_CONTACT_EMAIL + " CONTACT_EMAIL_KEYWORD [MORE_CONTACT_EMAIL_KEYWORDS]\n"
-            + "[" + PREFIX_CONTACT_NUMBER + " CONTACT_NUMBER_KEYWORD [MORE_CONTACT_NUMBER_KEYWORDS]\n"
             + "[" + PREFIX_LOCATION + " LOCATION_KEYWORD [MORE_LOCATION_KEYWORDS]\n"
             + "[" + PREFIX_STATUS + " STATUS_KEYWORD [MORE_STATUS_KEYWORDS]\n"
             + "[" + PREFIX_DESCRIPTION + " DESCRIPTION_KEYWORD [MORE_DESCRIPTION_KEYWORDS]\n"
@@ -43,6 +41,9 @@ public class InternshipFindCommand extends InternshipCommand {
             + PREFIX_COMPANY + " Tiktok Google " + PREFIX_STATUS + " accepted";
     public static final String NO_SEARCH_KEY_SPECIFIED = "At least one field and keyword "
             + "must be specified to be searched.";
+
+    public static final String INVALID_MODE_SPECIFIED = "Invalid mode specified. "
+            + "Please specify either 'withall' or 'withany'.";
 
     private final Predicate<Internship> predicate;
 

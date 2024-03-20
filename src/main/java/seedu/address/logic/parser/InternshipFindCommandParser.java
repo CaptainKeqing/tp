@@ -1,11 +1,14 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.InternshipMessages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.InternshipFindCommand.MODE_WITHALL;
 import static seedu.address.logic.commands.InternshipFindCommand.MODE_WITHANY;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,9 +19,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.InternshipFindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.internship.CompanyNameContainsKeywordsPredicate;
-import seedu.address.model.internship.ContactEmailContainsKeywordsPredicate;
 import seedu.address.model.internship.ContactNameContainsKeywordsPredicate;
-import seedu.address.model.internship.ContactNumberContainsKeywordsPredicate;
 import seedu.address.model.internship.DescriptionContainsKeywordsPredicate;
 import seedu.address.model.internship.Internship;
 import seedu.address.model.internship.LocationContainsKeywordsPredicate;
@@ -29,8 +30,8 @@ import seedu.address.model.internship.StatusContainsKeywordsPredicate;
  * Parses input arguments and creates a new InternshipFindCommand object
  */
 public class InternshipFindCommandParser implements InternshipParser<InternshipFindCommand> {
-    private static final Prefix[] supportedPrefixes = {PREFIX_COMPANY, PREFIX_CONTACT_NAME, PREFIX_CONTACT_EMAIL,
-        PREFIX_CONTACT_NUMBER, PREFIX_LOCATION, PREFIX_STATUS, PREFIX_DESCRIPTION, PREFIX_ROLE};
+    private static final Prefix[] supportedPrefixes = {PREFIX_COMPANY, PREFIX_CONTACT_NAME, PREFIX_LOCATION,
+        PREFIX_STATUS, PREFIX_DESCRIPTION, PREFIX_ROLE};
 
     /**
      * Parses the given {@code String} of arguments in the context of the InternshipFindCommand
@@ -44,7 +45,7 @@ public class InternshipFindCommandParser implements InternshipParser<InternshipF
 
         String mode = argMultimap.getPreamble().trim();
         if (!mode.equals(MODE_WITHALL) && !mode.equals(MODE_WITHANY)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, InternshipFindCommand.MESSAGE_USAGE));
+            throw new ParseException(InternshipFindCommand.INVALID_MODE_SPECIFIED);
         }
 
         if (!anyPrefixesPresent(argMultimap, InternshipFindCommandParser.supportedPrefixes)) {
@@ -100,12 +101,6 @@ public class InternshipFindCommandParser implements InternshipParser<InternshipF
         if (argMultimap.getValue(PREFIX_CONTACT_NAME).isPresent()) {
             predicates.add(createContactNamePredicate(argMultimap.getValue(PREFIX_CONTACT_NAME).get()));
         }
-        if (argMultimap.getValue(PREFIX_CONTACT_EMAIL).isPresent()) {
-            predicates.add(createContactEmailPredicate(argMultimap.getValue(PREFIX_CONTACT_EMAIL).get()));
-        }
-        if (argMultimap.getValue(PREFIX_CONTACT_NUMBER).isPresent()) {
-            predicates.add(createContactNumberPredicate(argMultimap.getValue(PREFIX_CONTACT_NUMBER).get()));
-        }
         if (argMultimap.getValue(PREFIX_LOCATION).isPresent()) {
             predicates.add(createLocationPredicate(argMultimap.getValue(PREFIX_LOCATION).get()));
         }
@@ -137,20 +132,6 @@ public class InternshipFindCommandParser implements InternshipParser<InternshipF
      */
     protected ContactNameContainsKeywordsPredicate createContactNamePredicate(String contactNameKeywords) {
         return new ContactNameContainsKeywordsPredicate(getKeywords(contactNameKeywords));
-    }
-
-    /**
-     * Creates a predicate that checks if an internship's contact email contains any of the keywords.
-     */
-    protected ContactEmailContainsKeywordsPredicate createContactEmailPredicate(String contactEmailKeywords) {
-        return new ContactEmailContainsKeywordsPredicate(getKeywords(contactEmailKeywords));
-    }
-
-    /**
-     * Creates a predicate that checks if an internship's contact number contains any of the keywords.
-     */
-    protected ContactNumberContainsKeywordsPredicate createContactNumberPredicate(String contactNumberKeywords) {
-        return new ContactNumberContainsKeywordsPredicate(getKeywords(contactNumberKeywords));
     }
 
     /**
