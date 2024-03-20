@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.InternshipMessages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.InternshipFindCommand.MODE_WITHALL;
 import static seedu.address.logic.commands.InternshipFindCommand.MODE_WITHANY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
@@ -40,6 +41,10 @@ public class InternshipFindCommandParser implements InternshipParser<InternshipF
      */
     public InternshipFindCommand parse(String args) throws ParseException {
         requireNonNull(args);
+        if (args.trim().isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, InternshipFindCommand.MESSAGE_USAGE));
+        }
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, InternshipFindCommandParser.supportedPrefixes);
 
@@ -66,7 +71,7 @@ public class InternshipFindCommandParser implements InternshipParser<InternshipF
      * @param argMultimap map of prefixes and their search keywords
      * @return the result of combining all the predicates with AND.
      */
-    private Predicate<Internship> createPredicateWithAll(ArgumentMultimap argMultimap) {
+    protected Predicate<Internship> createPredicateWithAll(ArgumentMultimap argMultimap) {
         return createPredicates(argMultimap).stream().reduce(Predicate::and).orElse(x -> true);
     }
 
@@ -77,7 +82,7 @@ public class InternshipFindCommandParser implements InternshipParser<InternshipF
      * @param argMultimap map of prefixes and their search keywords
      * @return the result of combining all the predicates with OR.
      */
-    private Predicate<Internship> createPredicateWithAny(ArgumentMultimap argMultimap) {
+    protected Predicate<Internship> createPredicateWithAny(ArgumentMultimap argMultimap) {
         return createPredicates(argMultimap).stream().reduce(Predicate::or).orElse(x -> false);
     }
 
