@@ -7,19 +7,19 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
- * Tests that a {@code Internship}'s {@code companyName} matches any of the keywords given.
+ * Tests that a {@code Internship}'s {@code location} matches any of the keywords given.
  */
-public class CompanyNameContainsKeywordsPredicate implements Predicate<Internship> {
+public class LocationContainsKeywordsPredicate implements Predicate<Internship> {
     private final List<String> keywords;
 
-    public CompanyNameContainsKeywordsPredicate(List<String> keywords) {
+    public LocationContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }
 
     @Override
     public boolean test(Internship internship) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(internship.getCompanyName().companyName,
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(internship.getLocation().toString(),
                         keyword));
     }
 
@@ -30,13 +30,13 @@ public class CompanyNameContainsKeywordsPredicate implements Predicate<Internshi
         }
 
         // instanceof handles nulls
-        if (!(other instanceof CompanyNameContainsKeywordsPredicate)) {
+        if (!(other instanceof LocationContainsKeywordsPredicate)) {
             return false;
         }
 
-        CompanyNameContainsKeywordsPredicate otherCompanyNameContainsKeywordsPredicate =
-                (CompanyNameContainsKeywordsPredicate) other;
-        return keywords.equals(otherCompanyNameContainsKeywordsPredicate.keywords);
+        LocationContainsKeywordsPredicate otherLocationContainsKeywordsPredicate =
+                (LocationContainsKeywordsPredicate) other;
+        return keywords.equals(otherLocationContainsKeywordsPredicate.keywords);
     }
 
     @Override
