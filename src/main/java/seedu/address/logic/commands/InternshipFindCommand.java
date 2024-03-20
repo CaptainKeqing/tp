@@ -30,17 +30,20 @@ public class InternshipFindCommand extends InternshipCommand {
             + "the prefix, contain all/any (depending on mode) of the specified keywords (case-insensitive) "
             + "and displays them as a list with index numbers. \n"
             + "Parameters: MODE ('withall' or 'withany', to specify if all keywords "
-            + "must be present or just any keyword must be present) "
-            + "[" + PREFIX_COMPANY + "COMPANY_NAME_KEYWORD [MORE_COMPANY_NAME_KEYWORDS] "
-            + "[" + PREFIX_CONTACT_NAME + "CONTACT_NAME_KEYWORD [MORE_CONTACT_NAME_KEYWORDS] "
-            + "[" + PREFIX_CONTACT_EMAIL + "CONTACT_EMAIL_KEYWORD [MORE_CONTACT_EMAIL_KEYWORDS] "
-            + "[" + PREFIX_CONTACT_NUMBER + "CONTACT_NUMBER_KEYWORD [MORE_CONTACT_NUMBER_KEYWORDS] "
-            + "[" + PREFIX_LOCATION + "LOCATION_KEYWORD [MORE_LOCATION_KEYWORDS] "
-            + "[" + PREFIX_STATUS + "STATUS_KEYWORD [MORE_STATUS_KEYWORDS] "
-            + "[" + PREFIX_DESCRIPTION + "DESCRIPTION_KEYWORD [MORE_DESCRIPTION_KEYWORDS] "
-            + "[" + PREFIX_ROLE + "ROLE_KEYWORD [MORE_ROLE_KEYWORDS]\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_COMPANY + "Tiktok [MORE_PREFIXES_AND_KEYWORDS]";
+            + "must be present or just any keyword must be present)\n"
+            + "[" + PREFIX_COMPANY + " COMPANY_NAME_KEYWORD [MORE_COMPANY_NAME_KEYWORDS]\n"
+            + "[" + PREFIX_CONTACT_NAME + " CONTACT_NAME_KEYWORD [MORE_CONTACT_NAME_KEYWORDS]\n"
+            + "[" + PREFIX_CONTACT_EMAIL + " CONTACT_EMAIL_KEYWORD [MORE_CONTACT_EMAIL_KEYWORDS]\n"
+            + "[" + PREFIX_CONTACT_NUMBER + " CONTACT_NUMBER_KEYWORD [MORE_CONTACT_NUMBER_KEYWORDS]\n"
+            + "[" + PREFIX_LOCATION + " LOCATION_KEYWORD [MORE_LOCATION_KEYWORDS]\n"
+            + "[" + PREFIX_STATUS + " STATUS_KEYWORD [MORE_STATUS_KEYWORDS]\n"
+            + "[" + PREFIX_DESCRIPTION + " DESCRIPTION_KEYWORD [MORE_DESCRIPTION_KEYWORDS]\n"
+            + "[" + PREFIX_ROLE + " ROLE_KEYWORD [MORE_ROLE_KEYWORDS]\n"
+            + "Example: " + COMMAND_WORD + " withany "
+            + PREFIX_COMPANY + " Tiktok Google " + PREFIX_STATUS + " accepted";
+    public static final String NO_SEARCH_KEY_SPECIFIED = "At least one field and keyword "
+            + "must be specified to be searched.";
+
     private final Predicate<Internship> predicate;
 
     public InternshipFindCommand(Predicate<Internship> predicate) {
