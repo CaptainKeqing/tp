@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import javafx.scene.paint.Color;
 import seedu.address.model.internship.ApplicationStatus;
 import seedu.address.model.internship.ApplicationStatus.StatusEnum;
 import seedu.address.model.internship.CompanyName;
@@ -30,6 +29,11 @@ public class InternshipCard extends UiPart<Region> {
      *
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
+    private static final String STYLE_WITH_FONT_COLOUR_RED = "-fx-text-fill: #ff0000;";
+    private static final String STYLE_WITH_FONT_COLOUR_GREEN = "-fx-text-fill: #00ff00;";
+    private static final String STYLE_WITH_FONT_COLOUR_YELLOW = "-fx-text-fill: #ffff00;";
+    private static final String STYLE_WITH_FONT_COLOUR_CYAN = "-fx-text-fill: #00ffff;";
+    private static final String STYLE_WITH_FONT_COLOUR_LIGHTSEAGREEN = "-fx-text-fill: #20b2aa;";
 
     public final Internship internship;
 
@@ -123,19 +127,19 @@ public class InternshipCard extends UiPart<Region> {
     private void setStatusLabelColour(StatusEnum statusEnum) {
         switch (statusEnum) {
         case TO_APPLY:
-            status.setTextFill(Color.GREEN);
+            status.setStyle(STYLE_WITH_FONT_COLOUR_CYAN);
             break;
         case PENDING:
-            status.setTextFill(Color.YELLOW);
+            status.setStyle(STYLE_WITH_FONT_COLOUR_YELLOW);
             break;
         case REJECTED:
-            status.setTextFill(Color.RED);
+            status.setStyle(STYLE_WITH_FONT_COLOUR_RED);
             break;
         case ACCEPTED:
-            status.setTextFill(Color.CYAN);
+            status.setStyle(STYLE_WITH_FONT_COLOUR_GREEN);
             break;
         case ONGOING:
-            status.setTextFill(Color.LIGHTSEAGREEN);
+            status.setStyle(STYLE_WITH_FONT_COLOUR_LIGHTSEAGREEN);
             break;
         default:
             throw new IllegalArgumentException("Unexpected application status: "

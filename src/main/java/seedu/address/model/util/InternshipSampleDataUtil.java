@@ -18,7 +18,7 @@ import seedu.address.model.internship.Role;
 import seedu.address.model.tag.Tag;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code InternshipData} with sample data.
  */
 public class InternshipSampleDataUtil {
     public static Internship[] getSampleInternships() {

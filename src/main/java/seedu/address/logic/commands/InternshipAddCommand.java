@@ -25,25 +25,26 @@ public class InternshipAddCommand extends InternshipCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an internship to internship data. "
             + "Parameters: "
-            + PREFIX_COMPANY + "COMPANY_NAME "
-            + PREFIX_CONTACT_NAME + "CONTACT_NAME "
-            + PREFIX_CONTACT_EMAIL + "CONTACT_EMAIL "
-            + PREFIX_CONTACT_NUMBER + "CONTACT_NUMBER "
-            + PREFIX_LOCATION + "LOCATION "
-            + PREFIX_STATUS + "STATUS "
-            + PREFIX_DESCRIPTION + "DESCRIPTION "
-            + PREFIX_ROLE + "ROLE\n"
+            + PREFIX_COMPANY + " COMPANY_NAME "
+            + PREFIX_DESCRIPTION + " DESCRIPTION "
+            + PREFIX_STATUS + " STATUS "
+            + PREFIX_CONTACT_NAME + " CONTACT_NAME "
+            + PREFIX_CONTACT_EMAIL + " CONTACT_EMAIL "
+            + PREFIX_CONTACT_NUMBER + " CONTACT_NUMBER "
+            + PREFIX_LOCATION + " LOCATION "
+            + PREFIX_ROLE + " ROLE\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_COMPANY + "Tiktok "
-            + PREFIX_CONTACT_EMAIL + "hr@tiktok.com "
-            + PREFIX_CONTACT_NUMBER + "9089030 "
-            + PREFIX_LOCATION + "remote "
-            + PREFIX_STATUS + "ongoing "
-            + PREFIX_DESCRIPTION + "create new recommendation engine "
-            + PREFIX_ROLE + "Software Intern";
+            + PREFIX_COMPANY + " Tiktok "
+            + PREFIX_DESCRIPTION + " create new recommendation engine "
+            + PREFIX_STATUS + " ongoing "
+            + PREFIX_CONTACT_NAME + " jane yeo "
+            + PREFIX_CONTACT_EMAIL + " hr@tiktok.com "
+            + PREFIX_CONTACT_NUMBER + " 9089030 "
+            + PREFIX_LOCATION + " remote "
+            + PREFIX_ROLE + " Software Intern";
 
     public static final String MESSAGE_SUCCESS = "New internship added: %1$s";
-    public static final String MESSAGE_DUPLICATE_INTERNSHIP = "This internship already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_INTERNSHIP = "This internship already exists in the internship list";
 
     private final Internship toAdd;
 

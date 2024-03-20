@@ -21,7 +21,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.InternshipData;
 import seedu.address.model.InternshipModel;
 import seedu.address.model.ReadOnlyInternshipData;
-import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.ReadOnlyInternshipUserPrefs;
 import seedu.address.model.internship.Internship;
 import seedu.address.testutil.InternshipBuilder;
 
@@ -90,12 +90,12 @@ public class InternshipAddCommandTest {
      */
     private class ModelStub implements InternshipModel {
         @Override
-        public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
+        public void setUserPrefs(ReadOnlyInternshipUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyUserPrefs getUserPrefs() {
+        public ReadOnlyInternshipUserPrefs getUserPrefs() {
             throw new AssertionError("This method should not be called.");
         }
 

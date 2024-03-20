@@ -36,22 +36,22 @@ public class InternshipMessages {
      */
     public static String format(Internship internship) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(internship.getCompanyName())
-                .append("; Company Name: ")
-                .append(internship.getLocation())
+        builder.append(" Company Name: ")
+                .append(internship.getCompanyName())
                 .append("; Location: ")
-                .append(internship.getDescription())
+                .append(internship.getLocation())
                 .append("; Description: ")
-                .append(internship.getRole())
+                .append(internship.getDescription())
                 .append("; Role: ")
-                .append(internship.getContactName())
+                .append(internship.getRole())
                 .append("; Contact Name: ")
-                .append(internship.getContactEmail())
+                .append(internship.getContactName())
                 .append("; Contact Email: ")
-                .append(internship.getContactNumber())
+                .append(internship.getContactEmail())
                 .append("; Contact Number: ")
-                .append(internship.getApplicationStatus())
-                .append("; Application Status: ");
+                .append(internship.getContactNumber())
+                .append("; Application Status: ")
+                .append(internship.getApplicationStatus());
         return builder.toString();
     }
 

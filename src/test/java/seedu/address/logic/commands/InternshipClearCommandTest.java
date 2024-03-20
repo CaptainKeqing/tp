@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.InternshipData;
 import seedu.address.model.InternshipModel;
 import seedu.address.model.InternshipModelManager;
-import seedu.address.model.UserPrefs;
+import seedu.address.model.InternshipUserPrefs;
 
 /**
  * Contains integration tests (interaction with the InternshipModel) and unit tests for InternshipClearCommand.
@@ -27,8 +27,9 @@ public class InternshipClearCommandTest {
 
     @Test
     public void execute_nonEmptyInternshipData_success() {
-        InternshipModel model = new InternshipModelManager(getTypicalInternshipData(), new UserPrefs());
-        InternshipModel expectedModel = new InternshipModelManager(getTypicalInternshipData(), new UserPrefs());
+        InternshipModel model = new InternshipModelManager(getTypicalInternshipData(), new InternshipUserPrefs());
+        InternshipModel expectedModel = new InternshipModelManager(getTypicalInternshipData(),
+                new InternshipUserPrefs());
         expectedModel.setInternshipData(new InternshipData());
 
         assertCommandSuccess(new InternshipClearCommand(), model,

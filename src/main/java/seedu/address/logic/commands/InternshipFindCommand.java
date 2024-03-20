@@ -18,15 +18,12 @@ import seedu.address.model.InternshipModel;
 import seedu.address.model.internship.Internship;
 
 /**
- * Finds and lists all internships in internships list whose fields contains any of the argument keywords.
+ * Finds and lists all internships in internship data whose name contains any of the argument keywords.
  * Keyword matching is case-insensitive.
  */
 public class InternshipFindCommand extends InternshipCommand {
-
     public static final String COMMAND_WORD = "find";
-
     public static final String MODE_WITHALL = "withall";
-
     public static final String MODE_WITHANY = "withany";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all internships whose fields, specified using "

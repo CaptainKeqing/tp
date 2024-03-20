@@ -53,7 +53,6 @@ public class InternshipData implements ReadOnlyInternshipData {
      */
     public void resetData(ReadOnlyInternshipData newData) {
         requireNonNull(newData);
-
         setInternships(newData.getInternshipList());
     }
 

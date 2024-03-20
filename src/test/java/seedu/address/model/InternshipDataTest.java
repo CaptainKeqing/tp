@@ -4,12 +4,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalInternships.ALICE_MICROSOFT;
+import static seedu.address.testutil.TypicalInternships.getTypicalInternshipData;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.internship.ApplicationStatus;
 import seedu.address.model.internship.CompanyName;
@@ -20,9 +26,10 @@ import seedu.address.model.internship.Description;
 import seedu.address.model.internship.Internship;
 import seedu.address.model.internship.Location;
 import seedu.address.model.internship.Role;
+import seedu.address.testutil.InternshipBuilder;
 
 public class InternshipDataTest {
-    private final InternshipData data = new InternshipData();
+    private final InternshipData internshipData = new InternshipData();
 
     @Test
     public void testAddInternship() {
@@ -37,8 +44,8 @@ public class InternshipDataTest {
                 new Role("Business Development Associate")
         );
 
-        data.addInternship(internship);
-        assertTrue(data.hasInternship(internship));
+        internshipData.addInternship(internship);
+        assertTrue(internshipData.hasInternship(internship));
     }
 
     @Test
@@ -193,28 +200,72 @@ public class InternshipDataTest {
         assertNotNull(internshipList);
         assertTrue(internshipList.isEmpty());
     }
+    @Test
+    public void constructor() {
+        assertEquals(Collections.emptyList(), internshipData.getInternshipList());
+    }
 
     @Test
-    public void testToString() {
-        InternshipData data = new InternshipData();
-        Internship internship = new Internship(
-                new CompanyName("LinkedIn"),
-                new ContactName("Mary Brown"),
-                new ContactEmail("marybrown@example.com"),
-                new ContactNumber("13579246"),
-                new Location("remote"),
-                new ApplicationStatus("pending"),
-                new Description("Data Analytics Internship"),
-                new Role("Data Analyst")
-        );
-        data.addInternship(internship);
+    public void resetData_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> internshipData.resetData(null));
+    }
 
-        String expected = "seedu.address.model.InternshipData{Internship list=[seedu.address.model.internship."
-                + "Internship{companyName=LinkedIn,"
-                + " contactName=Mary Brown, contactEmail=marybrown@example.com,"
-                + " contactNumber=13579246, location=REMOTE, applicationStatus=PENDING,"
-                + " description=Data Analytics Internship, role=Data Analyst}]}";
-        assertEquals(expected, data.toString());
+    @Test
+    public void resetData_withValidReadOnlyInternshipData_replacesData() {
+        InternshipData newData = getTypicalInternshipData();
+        internshipData.resetData(newData);
+        assertEquals(newData, internshipData);
+    }
+    @Test
+    public void hasInternship_nullInternship_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> internshipData.hasInternship(null));
+    }
+
+    @Test
+    public void hasInternship_internshipNotInInternshipData_returnsFalse() {
+        assertFalse(internshipData.hasInternship(ALICE_MICROSOFT));
+    }
+
+    @Test
+    public void hasInternship_internshipInInternshipData() {
+        internshipData.addInternship(ALICE_MICROSOFT);
+        assertTrue(internshipData.hasInternship(ALICE_MICROSOFT));
+    }
+
+    @Test
+    public void hasInternship_internshipWithSameIdentityFieldsInInternshipData() {
+        internshipData.addInternship(ALICE_MICROSOFT);
+        Internship editedAlice = new InternshipBuilder(ALICE_MICROSOFT).withCompanyName("Google")
+                .withContactName("John Doe").build();
+        assertFalse(internshipData.hasInternship(editedAlice));
+    }
+
+    @Test
+    public void getInternshipList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> internshipData.getInternshipList().remove(0));
+    }
+
+    @Test
+    public void toStringMethod() {
+        String expected = InternshipData.class.getCanonicalName() + "{Internship list="
+                + internshipData.getInternshipList() + "}";
+        assertEquals(expected, internshipData.toString());
+    }
+
+    /**
+     * A stub ReadOnlyInternshipData whose internships list can violate interface constraints.
+     */
+    private static class InternshipDataStub implements ReadOnlyInternshipData {
+        private final ObservableList<Internship> internships = FXCollections.observableArrayList();
+
+        InternshipDataStub(Collection<Internship> internships) {
+            this.internships.setAll(internships);
+        }
+
+        @Override
+        public ObservableList<Internship> getInternshipList() {
+            return internships;
+        }
     }
 }
 

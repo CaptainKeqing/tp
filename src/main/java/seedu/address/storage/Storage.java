@@ -5,10 +5,10 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataLoadingException;
+import seedu.address.model.InternshipUserPrefs;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyInternshipData;
-import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.UserPrefs;
+import seedu.address.model.ReadOnlyInternshipUserPrefs;
 
 /**
  * API of the Storage component
@@ -16,15 +16,14 @@ import seedu.address.model.UserPrefs;
 public interface Storage extends AddressBookStorage, UserPrefsStorage, InternshipDataStorage {
 
     @Override
-    Optional<UserPrefs> readUserPrefs() throws DataLoadingException;
+    Optional<InternshipUserPrefs> readUserPrefs() throws DataLoadingException;
 
     @Override
-    void saveUserPrefs(ReadOnlyUserPrefs userPrefs) throws IOException;
+    void saveUserPrefs(ReadOnlyInternshipUserPrefs userPrefs) throws IOException;
 
     // ================ AddressBook methods ==============================
 
-    @Override
-    Path getAddressBookFilePath();
+    // Preserved for LogicManager
 
     @Override
     Optional<ReadOnlyAddressBook> readAddressBook() throws DataLoadingException;

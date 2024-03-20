@@ -8,38 +8,39 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.InternshipCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.AddressBookParser;
+import seedu.address.logic.parser.InternshipDataParser;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Person;
+import seedu.address.model.InternshipModel;
+import seedu.address.model.ReadOnlyInternshipData;
+import seedu.address.model.internship.Internship;
 import seedu.address.storage.Storage;
 
 /**
- * The main LogicManager of the app.
+ * The main InternshipLogicManager of the app.
  */
-public class LogicManager implements Logic {
+public class InternshipLogicManager implements InternshipLogic {
     public static final String FILE_OPS_ERROR_FORMAT = "Could not save data due to the following error: %s";
 
     public static final String FILE_OPS_PERMISSION_ERROR_FORMAT =
             "Could not save data to file %s due to insufficient permissions to write to the file or the folder.";
 
-    private final Logger logger = LogsCenter.getLogger(LogicManager.class);
+    private final Logger logger = LogsCenter.getLogger(InternshipLogicManager.class);
 
-    private final Model model;
+    private final InternshipModel model;
     private final Storage storage;
-    private final AddressBookParser addressBookParser;
+    private final InternshipDataParser internshipDataParser;
 
     /**
-     * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
+     * Constructs a {@code InternshipLogicManager} with the
+     * given {@code InternshipModel} and {@code Storage}.
      */
-    public LogicManager(Model model, Storage storage) {
+    public InternshipLogicManager(InternshipModel model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        addressBookParser = new AddressBookParser();
+        internshipDataParser = new InternshipDataParser();
     }
 
     @Override
@@ -47,11 +48,11 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        Command command = addressBookParser.parseCommand(commandText);
+        InternshipCommand command = internshipDataParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
         try {
-            storage.saveAddressBook(model.getAddressBook());
+            storage.saveInternshipData(model.getInternshipData());
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {
@@ -62,18 +63,18 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return model.getAddressBook();
+    public ReadOnlyInternshipData getInternshipData() {
+        return model.getInternshipData();
     }
 
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return model.getFilteredPersonList();
+    public ObservableList<Internship> getFilteredInternshipList() {
+        return model.getFilteredInternshipList();
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return model.getAddressBookFilePath();
+    public Path getInternshipDataFilePath() {
+        return model.getInternshipDataFilePath();
     }
 
     @Override

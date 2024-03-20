@@ -23,7 +23,7 @@ import seedu.address.logic.commands.InternshipEditCommand.EditInternshipDescript
 import seedu.address.model.InternshipData;
 import seedu.address.model.InternshipModel;
 import seedu.address.model.InternshipModelManager;
-import seedu.address.model.UserPrefs;
+import seedu.address.model.InternshipUserPrefs;
 import seedu.address.model.internship.Internship;
 import seedu.address.testutil.EditInternshipDescriptorBuilder;
 import seedu.address.testutil.InternshipBuilder;
@@ -33,7 +33,8 @@ import seedu.address.testutil.InternshipBuilder;
  */
 public class InternshipEditCommandTest {
 
-    private final InternshipModel model = new InternshipModelManager(getTypicalInternshipData(), new UserPrefs());
+    private final InternshipModel model = new InternshipModelManager(getTypicalInternshipData(),
+            new InternshipUserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -45,7 +46,7 @@ public class InternshipEditCommandTest {
                 InternshipMessages.format(editedInternship));
 
         InternshipModel expectedModel = new InternshipModelManager(new InternshipData(model.getInternshipData()),
-                new UserPrefs());
+                new InternshipUserPrefs());
         expectedModel.setInternship(model.getFilteredInternshipList().get(0), editedInternship);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -69,7 +70,7 @@ public class InternshipEditCommandTest {
                 InternshipMessages.format(editedInternship));
 
         InternshipModel expectedModel = new InternshipModelManager(new InternshipData(model.getInternshipData()),
-                new UserPrefs());
+                new InternshipUserPrefs());
         expectedModel.setInternship(lastInternship, editedInternship);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -85,7 +86,7 @@ public class InternshipEditCommandTest {
                 InternshipMessages.format(editedInternship));
 
         InternshipModel expectedModel = new InternshipModelManager(new
-                InternshipData(model.getInternshipData()), new UserPrefs());
+                InternshipData(model.getInternshipData()), new InternshipUserPrefs());
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -104,7 +105,7 @@ public class InternshipEditCommandTest {
                 InternshipMessages.format(editedInternship));
 
         InternshipModel expectedModel = new InternshipModelManager(new InternshipData(model.getInternshipData()),
-                new UserPrefs());
+                new InternshipUserPrefs());
         expectedModel.setInternship(model.getFilteredInternshipList().get(0), editedInternship);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -176,7 +177,7 @@ public class InternshipEditCommandTest {
         assertFalse(standardCommand.equals(null));
 
         // different types -> returns false
-        assertFalse(standardCommand.equals(new ClearCommand()));
+        assertFalse(standardCommand.equals(new InternshipClearCommand()));
 
         // different index -> returns false
         assertFalse(standardCommand.equals(new InternshipEditCommand(INDEX_SECOND_INTERNSHIP, DESC_AMY.build())));

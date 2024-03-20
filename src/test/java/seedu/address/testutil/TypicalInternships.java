@@ -82,7 +82,6 @@ public class TypicalInternships {
         }
         return id;
     }
-
     public static List<Internship> getTypicalInternships() {
         return new ArrayList<>(Arrays.asList(ALICE_MICROSOFT, BENSON_GOOGLE, CARL_OPENAI));
     }

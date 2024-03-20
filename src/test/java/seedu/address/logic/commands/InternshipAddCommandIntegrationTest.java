@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.InternshipMessages;
 import seedu.address.model.InternshipModel;
 import seedu.address.model.InternshipModelManager;
-import seedu.address.model.UserPrefs;
+import seedu.address.model.InternshipUserPrefs;
 import seedu.address.model.internship.Internship;
 import seedu.address.testutil.InternshipBuilder;
 
@@ -23,14 +23,15 @@ public class InternshipAddCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new InternshipModelManager(getTypicalInternshipData(), new UserPrefs());
+        model = new InternshipModelManager(getTypicalInternshipData(), new InternshipUserPrefs());
     }
 
     @Test
     public void execute_newInternship_success() {
         Internship validInternship = new InternshipBuilder().build();
 
-        InternshipModel expectedModel = new InternshipModelManager(model.getInternshipData(), new UserPrefs());
+        InternshipModel expectedModel = new InternshipModelManager(model.getInternshipData(),
+                new InternshipUserPrefs());
         expectedModel.addInternship(validInternship);
 
         assertCommandSuccess(new InternshipAddCommand(validInternship), model,

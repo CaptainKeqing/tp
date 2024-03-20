@@ -38,12 +38,12 @@ public class InternshipModelManagerTest {
     @Test
     public void constructor() {
         ReadOnlyInternshipData internshipData = new InternshipData();
-        ReadOnlyUserPrefs userPrefs = new UserPrefs();
+        ReadOnlyInternshipUserPrefs userPrefs = new InternshipUserPrefs();
         InternshipModelManager modelManager = new InternshipModelManager(internshipData, userPrefs);
         assertEquals(internshipData, modelManager.getInternshipData());
         assertEquals(userPrefs, modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
-        assertEquals(Paths.get("data", "addressbook.json"), modelManager.getInternshipDataFilePath());
+        assertEquals(Paths.get("data", "internshipdata.json"), modelManager.getInternshipDataFilePath());
     }
 
     @Test
@@ -74,7 +74,7 @@ public class InternshipModelManagerTest {
     public void equals() {
         InternshipData internshipData = new InternshipData();
         internshipData.addInternship(internship);
-        UserPrefs userPrefs = new UserPrefs();
+        InternshipUserPrefs userPrefs = new InternshipUserPrefs();
         InternshipModelManager internshipModelManager = new InternshipModelManager(internshipData, userPrefs);
 
         // same values -> returns true
@@ -129,16 +129,16 @@ public class InternshipModelManagerTest {
     public void getInternshipData() {
         InternshipData internshipData = new InternshipData();
         internshipData.addInternship(internship);
-        UserPrefs userPrefs = new UserPrefs();
+        InternshipUserPrefs userPrefs = new InternshipUserPrefs();
         InternshipModelManager internshipModelManager = new InternshipModelManager(internshipData, userPrefs);
         assertEquals(internshipData, internshipModelManager.getInternshipData());
     }
 
     @Test
-    public void getUserPrefs() {
+    public void getInternshipUserPrefs() {
         InternshipData internshipData = new InternshipData();
         internshipData.addInternship(internship);
-        UserPrefs userPrefs = new UserPrefs();
+        InternshipUserPrefs userPrefs = new InternshipUserPrefs();
         InternshipModelManager internshipModelManager = new InternshipModelManager(internshipData, userPrefs);
         assertEquals(userPrefs, internshipModelManager.getUserPrefs());
     }
@@ -147,7 +147,7 @@ public class InternshipModelManagerTest {
     public void getGuiSettings() {
         InternshipData internshipData = new InternshipData();
         internshipData.addInternship(internship);
-        UserPrefs userPrefs = new UserPrefs();
+        InternshipUserPrefs userPrefs = new InternshipUserPrefs();
         InternshipModelManager internshipModelManager = new InternshipModelManager(internshipData, userPrefs);
         assertEquals(new GuiSettings(), internshipModelManager.getGuiSettings());
     }
@@ -156,7 +156,7 @@ public class InternshipModelManagerTest {
     public void setGuiSettings() {
         InternshipData internshipData = new InternshipData();
         internshipData.addInternship(internship);
-        UserPrefs userPrefs = new UserPrefs();
+        InternshipUserPrefs userPrefs = new InternshipUserPrefs();
         InternshipModelManager internshipModelManager = new InternshipModelManager(internshipData, userPrefs);
         GuiSettings guiSettings = new GuiSettings(1000, 1000, 100, 100);
         internshipModelManager.setGuiSettings(guiSettings);
@@ -167,7 +167,7 @@ public class InternshipModelManagerTest {
     public void setInternshipData() {
         InternshipData internshipData = new InternshipData();
         internshipData.addInternship(internship);
-        UserPrefs userPrefs = new UserPrefs();
+        InternshipUserPrefs userPrefs = new InternshipUserPrefs();
         InternshipModelManager internshipModelManager = new InternshipModelManager(internshipData, userPrefs);
         InternshipData newInternshipData = new InternshipData();
         newInternshipData.addInternship(internship);

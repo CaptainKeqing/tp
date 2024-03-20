@@ -12,11 +12,12 @@ import seedu.address.model.internship.exceptions.DuplicateInternshipException;
 import seedu.address.model.internship.exceptions.InternshipNotFoundException;
 
 /**
- * A list of persons that enforces uniqueness between its elements and does not allow nulls.
- * A person is considered unique by comparing using {@code Person#isSamePerson(Person)}. As such, adding and updating of
- * persons uses Person#isSamePerson(Person) for equality so as to ensure that the person being added or updated is
- * unique in terms of identity in the UniquePersonList. However, the removal of a person uses Person#equals(Object) so
- * as to ensure that the person with exactly the same fields will be removed.
+ * A list of internships that enforces uniqueness between its elements and does not allow nulls.
+ * An internship is considered unique by comparing using {@code Internship#isSameInternship(Internship)}.
+ * As such, adding and updating of internships uses Internship#isSameInternship(Internship) for equality
+ * to ensure that the internship being added or updated is unique in terms of identity in the
+ * UniqueInternshipList. However, the removal of a internship uses Internship#equals(Object),to
+ * ensure that the internship with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
@@ -29,16 +30,17 @@ public class UniqueInternshipList implements Iterable<Internship> {
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent person as the given argument.
+     * Returns true if the list contains an equivalent internship as the given argument.
+     * @param toCheck the internship to check for the equality of identity fields
      */
     public boolean contains(Internship toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::equals);
+        return internalList.stream().anyMatch(toCheck::isSameInternship);
     }
 
     /**
-     * Adds a person to the list.
-     * The person must not already exist in the list.
+     * Adds a internship to the list.
+     * The internship must not already exist in the list.
      */
     public void add(Internship toAdd) {
         requireNonNull(toAdd);
@@ -49,9 +51,10 @@ public class UniqueInternshipList implements Iterable<Internship> {
     }
 
     /**
-     * Replaces the person {@code target} in the list with {@code editedPerson}.
+     * Replaces the internship {@code target} in the list with {@code editedInternship}.
      * {@code target} must exist in the list.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the list.
+     * The internship identity of {@code editedInternship} must not be the same as another
+     * existing internship in the list.
      */
     public void setInternship(Internship target, Internship editedInternship) {
         requireAllNonNull(target, editedInternship);
@@ -69,8 +72,8 @@ public class UniqueInternshipList implements Iterable<Internship> {
     }
 
     /**
-     * Removes the equivalent person from the list.
-     * The person must exist in the list.
+     * Removes the equivalent internship from the list.
+     * The internship must exist in the list.
      */
     public void remove(Internship toRemove) {
         requireNonNull(toRemove);
@@ -85,8 +88,8 @@ public class UniqueInternshipList implements Iterable<Internship> {
     }
 
     /**
-     * Replaces the contents of this list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of this list with {@code internships}.
+     * {@code internships} must not contain duplicate internships.
      */
     public void setInternships(List<Internship> internships) {
         requireAllNonNull(internships);
@@ -135,7 +138,7 @@ public class UniqueInternshipList implements Iterable<Internship> {
     }
 
     /**
-     * Returns true if {@code persons} contains only unique persons.
+     * Returns true if {@code internships} contains only unique internships.
      */
     private boolean internshipsAreUnique(List<Internship> internships) {
         for (int i = 0; i < internships.size() - 1; i++) {

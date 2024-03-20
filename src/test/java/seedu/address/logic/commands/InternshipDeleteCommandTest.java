@@ -16,7 +16,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.InternshipMessages;
 import seedu.address.model.InternshipModel;
 import seedu.address.model.InternshipModelManager;
-import seedu.address.model.UserPrefs;
+import seedu.address.model.InternshipUserPrefs;
 import seedu.address.model.internship.Internship;
 
 /**
@@ -24,7 +24,7 @@ import seedu.address.model.internship.Internship;
  */
 public class InternshipDeleteCommandTest {
 
-    private InternshipModel model = new InternshipModelManager(getTypicalInternshipData(), new UserPrefs());
+    private InternshipModel model = new InternshipModelManager(getTypicalInternshipData(), new InternshipUserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -34,7 +34,8 @@ public class InternshipDeleteCommandTest {
         String expectedMessage = String.format(InternshipDeleteCommand.MESSAGE_DELETE_INTERNSHIP_SUCCESS,
                 InternshipMessages.format(internshipToDelete));
 
-        InternshipModelManager expectedModel = new InternshipModelManager(model.getInternshipData(), new UserPrefs());
+        InternshipModelManager expectedModel = new InternshipModelManager(model.getInternshipData(),
+                new InternshipUserPrefs());
         expectedModel.deleteInternship(internshipToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
@@ -58,7 +59,8 @@ public class InternshipDeleteCommandTest {
         String expectedMessage = String.format(InternshipDeleteCommand.MESSAGE_DELETE_INTERNSHIP_SUCCESS,
                 InternshipMessages.format(internshipToDelete));
 
-        InternshipModel expectedModel = new InternshipModelManager(model.getInternshipData(), new UserPrefs());
+        InternshipModel expectedModel = new InternshipModelManager(model.getInternshipData(),
+                new InternshipUserPrefs());
         expectedModel.deleteInternship(internshipToDelete);
         showNoInternship(expectedModel);
 

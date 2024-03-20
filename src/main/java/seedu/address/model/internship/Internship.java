@@ -73,8 +73,8 @@ public class Internship {
     }
 
     /**
-     * Returns true if both internships have the same name.
-     * This defines a weaker notion of equality between two internships.
+     * Returns true if both internships have the same company name, location, role and description.
+     * This defines the same notion of equality between two internships. (Identity fields)
      */
     public boolean isSameInternship(Internship otherInternship) {
         if (otherInternship == this) {
@@ -105,9 +105,13 @@ public class Internship {
 
         Internship otherInternship = (Internship) other;
         return companyName.equals(otherInternship.companyName)
+                && contactName.equals(otherInternship.contactName)
+                && contactEmail.equals(otherInternship.contactEmail)
+                && contactNumber.equals(otherInternship.contactNumber)
                 && location.equals(otherInternship.location)
-                && role.equals(otherInternship.role)
-                && description.equals(otherInternship.description);
+                && applicationStatus.equals(otherInternship.applicationStatus)
+                && description.equals(otherInternship.description)
+                && role.equals(otherInternship.role);
     }
 
     @Override

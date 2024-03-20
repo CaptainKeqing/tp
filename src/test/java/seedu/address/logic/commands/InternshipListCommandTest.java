@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.InternshipModel;
 import seedu.address.model.InternshipModelManager;
-import seedu.address.model.UserPrefs;
+import seedu.address.model.InternshipUserPrefs;
 
 /**
  * Contains integration tests (interaction with the InternshipModel) and unit tests for InternshipListCommand.
@@ -23,8 +23,8 @@ public class InternshipListCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new InternshipModelManager(getTypicalInternshipData(), new UserPrefs());
-        expectedModel = new InternshipModelManager(model.getInternshipData(), new UserPrefs());
+        model = new InternshipModelManager(getTypicalInternshipData(), new InternshipUserPrefs());
+        expectedModel = new InternshipModelManager(model.getInternshipData(), new InternshipUserPrefs());
     }
 
     @Test
